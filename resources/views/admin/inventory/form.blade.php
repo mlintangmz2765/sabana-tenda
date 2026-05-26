@@ -5,7 +5,9 @@
 @section('content')
 <form method="POST"
       action="{{ $item->exists ? route('admin.inventory.update', $item) : route('admin.inventory.store') }}"
-      class="max-w-3xl">
+      enctype="multipart/form-data"
+      class="max-w-3xl"
+      x-data="{ previewUrl: '{{ $item->image_path ? asset('storage/' . $item->image_path) : '' }}' }">
     @csrf
     @if ($item->exists) @method('PUT') @endif
 
@@ -13,7 +15,7 @@
         <div>
             <label class="text-sm font-medium text-slate-700">Nama Barang <span class="text-rose-500">*</span></label>
             <input type="text" name="name" value="{{ old('name', $item->name) }}" required maxlength="120"
-                   class="w-full mt-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-sabana-500">
+                   class="w-full mt-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-forest-500">
             @error('name') <p class="text-xs text-rose-600 mt-1">{{ $message }}</p> @enderror
         </div>
 
@@ -23,7 +25,7 @@
                 <select name="category_id" required class="w-full mt-1 px-4 py-2 border border-slate-300 rounded-lg text-sm">
                     <option value="">Pilih kategori</option>
                     @foreach ($categories as $cat)
-                        <option value="{{ $cat->id }}" @selected(old('category_id', $item->category_id) == $cat->id)>{{ $cat->icon }} {{ $cat->name }}</option>
+                        <option value="{{ $cat->id }}" @selected(old('category_id', $item->category_id) == $cat->id)>{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -53,6 +55,45 @@
             </div>
         </div>
 
+        {{-- IMAGE UPLOAD --}}
+        <div>
+            <label class="text-sm font-medium text-slate-700">Foto Produk</label>
+            <div class="mt-2 flex items-start gap-4">
+                {{-- Preview --}}
+                <div class="w-32 h-32 border-2 border-dashed border-slate-300 rounded-lg flex items-center justify-center overflow-hidden bg-slate-50 flex-shrink-0">
+                    <template x-if="previewUrl">
+                        <img :src="previewUrl" class="w-full h-full object-cover" alt="Preview">
+                    </template>
+                    <template x-if="!previewUrl">
+                        <div class="text-center text-slate-400">
+                            <x-icon name="camera" class="w-8 h-8 mx-auto mb-1"/>
+                            <span class="text-[10px]">No image</span>
+                        </div>
+                    </template>
+                </div>
+                {{-- Upload input --}}
+                <div class="flex-1">
+                    <input type="file" name="image" accept="image/jpeg,image/png,image/webp"
+                           @change="
+                               const file = $event.target.files[0];
+                               if (file) {
+                                   previewUrl = URL.createObjectURL(file);
+                               }
+                           "
+                           class="w-full text-sm text-slate-600 file:mr-3 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-forest-50 file:text-forest-700 file:rounded-lg hover:file:bg-forest-100 file:cursor-pointer">
+                    <p class="text-xs text-slate-500 mt-2">Format: JPG, PNG, atau WebP. Maksimal 2MB.</p>
+                    @error('image') <p class="text-xs text-rose-600 mt-1">{{ $message }}</p> @enderror
+                    @if ($item->image_path)
+                        <label class="flex items-center gap-2 mt-2 text-xs text-slate-600 cursor-pointer">
+                            <input type="checkbox" name="remove_image" value="1" class="rounded text-rose-600"
+                                   @change="if ($event.target.checked) previewUrl = ''">
+                            Hapus foto saat ini
+                        </label>
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <div>
             <label class="text-sm font-medium text-slate-700">Deskripsi</label>
             <textarea name="description" rows="3" class="w-full mt-1 px-4 py-2 border border-slate-300 rounded-lg text-sm">{{ old('description', $item->description) }}</textarea>
@@ -67,7 +108,7 @@
 
     <div class="flex items-center justify-end gap-3 mt-6">
         <a href="{{ route('admin.inventory.index') }}" class="px-5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg">Batal</a>
-        <button type="submit" class="px-6 py-2 bg-sabana-700 hover:bg-sabana-800 text-white text-sm font-semibold rounded-lg shadow">
+        <button type="submit" class="px-6 py-2 bg-forest-950 hover:bg-forest-800 text-white text-sm font-semibold rounded-lg shadow">
             {{ $item->exists ? 'Simpan Perubahan' : 'Tambah Barang' }}
         </button>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class InventoryController extends Controller
@@ -46,6 +47,11 @@ class InventoryController extends Controller
         $data['status'] = $data['available_stock'] > 0 ? Item::STATUS_AVAILABLE : Item::STATUS_UNAVAILABLE;
         $data['is_active'] = true;
 
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $data['image_path'] = $request->file('image')->store('items', 'public');
+        }
+
         Item::create($data);
 
         return redirect()->route('admin.inventory.index')->with('success', 'Barang berhasil ditambahkan.');
@@ -64,6 +70,23 @@ class InventoryController extends Controller
         $stockDelta = (int) $data['stock'] - (int) $item->stock;
         if ($stockDelta !== 0) {
             $data['available_stock'] = max(0, (int) $item->available_stock + $stockDelta);
+        }
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($item->image_path) {
+                Storage::disk('public')->delete($item->image_path);
+            }
+            $data['image_path'] = $request->file('image')->store('items', 'public');
+        }
+
+        // Handle image removal
+        if ($request->boolean('remove_image') && ! $request->hasFile('image')) {
+            if ($item->image_path) {
+                Storage::disk('public')->delete($item->image_path);
+            }
+            $data['image_path'] = null;
         }
 
         $item->update($data);
@@ -91,7 +114,7 @@ class InventoryController extends Controller
             'stock' => ['required', 'integer', 'min:0'],
             'condition' => ['required', 'in:good,minor_damage,heavy_damage'],
             'price_per_day' => ['required', 'integer', 'min:0'],
-            'image_path' => ['nullable', 'string', 'max:255'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,webp', 'max:2048'],
         ]);
     }
 }

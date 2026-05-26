@@ -51,9 +51,13 @@
             @foreach ($items as $idx => $item)
                 <a href="{{ route('catalog.show', $item) }}" class="group bg-bone-50 hover:bg-bone-100 transition relative">
                     <div class="aspect-[4/5] bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 relative overflow-hidden border-b border-bone-200">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <x-icon :name="$itemIcons[$item->category->name] ?? 'mountain'" class="w-24 h-24 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>
-                        </div>
+                        @if ($item->image_path)
+                            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <x-icon :name="$itemIcons[$item->category->name] ?? 'mountain'" class="w-24 h-24 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>
+                            </div>
+                        @endif
                         <div class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] text-bone-700">{{ $item->item_code }}</div>
                         @if($item->available_stock > 0)
                             <div class="absolute bottom-4 right-4 px-2 py-1 bg-forest-950 text-bone-50 font-mono text-[9px] tracking-wider uppercase">Stok {{ $item->available_stock }}</div>

@@ -24,9 +24,13 @@
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
         <div class="lg:col-span-7">
             <div class="aspect-square bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 border border-bone-200 relative overflow-hidden">
-                <x-icon :name="$iconName" class="absolute inset-0 m-auto w-1/2 h-1/2 text-forest-700/30"/>
-                <div class="absolute top-6 left-6 font-mono text-[10px] tracking-[0.25em] uppercase text-bone-700">{{ $item->item_code }}</div>
-                <div class="absolute bottom-6 left-6 font-mono text-[10px] tracking-[0.25em] uppercase text-bone-700">{{ $item->category->name }}</div>
+                @if ($item->image_path)
+                    <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover">
+                @else
+                    <x-icon :name="$iconName" class="absolute inset-0 m-auto w-1/2 h-1/2 text-forest-700/30"/>
+                @endif
+                <div class="absolute top-6 left-6 font-mono text-[10px] tracking-[0.25em] uppercase text-bone-700 bg-bone-50/80 px-2 py-1">{{ $item->item_code }}</div>
+                <div class="absolute bottom-6 left-6 font-mono text-[10px] tracking-[0.25em] uppercase text-bone-700 bg-bone-50/80 px-2 py-1">{{ $item->category->name }}</div>
             </div>
         </div>
 
@@ -122,8 +126,12 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-bone-200 border border-bone-200">
                 @foreach ($relatedItems as $related)
                     <a href="{{ route('catalog.show', $related) }}" class="group bg-bone-50 hover:bg-bone-100 transition">
-                        <div class="aspect-square bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 flex items-center justify-center">
-                            <x-icon :name="$itemIcons[$related->category->name] ?? 'mountain'" class="w-16 h-16 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>
+                        <div class="aspect-square bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 flex items-center justify-center relative overflow-hidden">
+                            @if ($related->image_path)
+                                <img src="{{ asset('storage/' . $related->image_path) }}" alt="{{ $related->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            @else
+                                <x-icon :name="$itemIcons[$related->category->name] ?? 'mountain'" class="w-16 h-16 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>
+                            @endif
                         </div>
                         <div class="p-4">
                             <div class="font-display text-lg font-medium text-forest-950 tracking-super-tight">{{ $related->name }}</div>
