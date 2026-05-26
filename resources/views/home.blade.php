@@ -159,7 +159,7 @@
                 <a href="{{ route('catalog.show', $item) }}" class="group bg-bone-50 hover:bg-bone-100 transition relative">
                     <div class="aspect-[4/5] bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 relative overflow-hidden border-b border-bone-200">
                         @if ($item->image_path)
-                            <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{ asset('storage/app/public/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <x-icon :name="$itemIcons[$item->category->name] ?? 'mountain'" class="w-24 h-24 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>

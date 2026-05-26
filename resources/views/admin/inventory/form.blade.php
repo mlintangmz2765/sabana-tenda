@@ -7,7 +7,7 @@
       action="{{ $item->exists ? route('admin.inventory.update', $item) : route('admin.inventory.store') }}"
       enctype="multipart/form-data"
       class="max-w-3xl"
-      x-data="{ previewUrl: '{{ $item->image_path ? asset('storage/' . $item->image_path) : '' }}' }">
+      x-data="{ previewUrl: '{{ $item->image_path ? asset('storage/app/public/' . $item->image_path) : '' }}' }">
     @csrf
     @if ($item->exists) @method('PUT') @endif
 

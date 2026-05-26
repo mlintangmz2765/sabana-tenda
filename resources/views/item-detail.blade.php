@@ -25,7 +25,7 @@
         <div class="lg:col-span-7">
             <div class="aspect-square bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 border border-bone-200 relative overflow-hidden">
                 @if ($item->image_path)
-                    <img src="{{ asset('storage/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="{{ asset('storage/app/public/' . $item->image_path) }}" alt="{{ $item->name }}" class="absolute inset-0 w-full h-full object-cover">
                 @else
                     <x-icon :name="$iconName" class="absolute inset-0 m-auto w-1/2 h-1/2 text-forest-700/30"/>
                 @endif
@@ -128,7 +128,7 @@
                     <a href="{{ route('catalog.show', $related) }}" class="group bg-bone-50 hover:bg-bone-100 transition">
                         <div class="aspect-square bg-gradient-to-br from-bone-100 via-bone-50 to-forest-50 flex items-center justify-center relative overflow-hidden">
                             @if ($related->image_path)
-                                <img src="{{ asset('storage/' . $related->image_path) }}" alt="{{ $related->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img src="{{ asset('storage/app/public/' . $related->image_path) }}" alt="{{ $related->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                             @else
                                 <x-icon :name="$itemIcons[$related->category->name] ?? 'mountain'" class="w-16 h-16 text-forest-700/30 group-hover:scale-110 transition-transform duration-500"/>
                             @endif
