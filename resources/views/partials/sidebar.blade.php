@@ -69,9 +69,13 @@
                     <x-icon name="chart-bar" class="w-4 h-4 {{ request()->routeIs('customer.dashboard') ? 'text-ember-400' : '' }}"/>
                     Dashboard
                 </a>
-                <a href="{{ route('catalog') }}" class="flex items-center gap-3 px-3 py-2.5 text-sm text-bone-200 hover:bg-forest-900 hover:text-bone-50">
-                    <x-icon name="shopping-bag" class="w-4 h-4"/>
+                <a href="{{ route('customer.booking') }}" class="flex items-center gap-3 px-3 py-2.5 text-sm {{ request()->routeIs('customer.booking') ? 'bg-forest-800 text-bone-50 font-medium' : 'text-bone-200 hover:bg-forest-900 hover:text-bone-50' }}">
+                    <x-icon name="shopping-bag" class="w-4 h-4 {{ request()->routeIs('customer.booking') ? 'text-ember-400' : '' }}"/>
                     Sewa Sekarang
+                </a>
+                <a href="{{ route('catalog') }}" class="flex items-center gap-3 px-3 py-2.5 text-sm text-bone-200 hover:bg-forest-900 hover:text-bone-50">
+                    <x-icon name="search" class="w-4 h-4"/>
+                    Jelajahi Katalog
                 </a>
             @endif
         </nav>

@@ -81,7 +81,7 @@
             <div class="mt-10 flex flex-wrap gap-3">
                 @auth
                     @if (auth()->user()->isCustomer())
-                        <a href="{{ route('catalog') }}"
+                        <a href="{{ route('customer.booking') }}"
                            class="inline-flex items-center gap-3 px-7 py-4 bg-forest-950 hover:bg-forest-800 text-bone-50 text-sm font-medium transition group">
                             <x-icon name="shopping-bag" class="w-4 h-4"/>
                             Sewa Sekarang

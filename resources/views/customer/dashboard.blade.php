@@ -37,13 +37,23 @@
     </div>
 @endif
 
+@if (session('success'))
+    <div class="bg-forest-50 border border-forest-700 p-5 text-sm text-forest-700 mb-6 flex items-start gap-3">
+        <x-icon name="check-circle" class="w-5 h-5 mt-0.5"/>
+        <div>
+            <h3 class="font-semibold">Berhasil!</h3>
+            <p class="mt-1">{{ session('success') }}</p>
+        </div>
+    </div>
+@endif
+
 <div class="card-stack overflow-hidden">
     <div class="p-6 lg:p-8 border-b border-bone-200 flex items-end justify-between">
         <div>
             <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-ember-600 mb-2">Riwayat</div>
             <div class="font-display text-2xl font-medium text-forest-950 tracking-super-tight">Peminjaman Saya</div>
         </div>
-        <a href="{{ route('catalog') }}" class="text-sm font-medium text-forest-950 hover:text-forest-700 inline-flex items-center gap-2 group">
+        <a href="{{ route('customer.booking') }}" class="text-sm font-medium text-forest-950 hover:text-forest-700 inline-flex items-center gap-2 group">
             Sewa Lagi <x-icon name="arrow-up-right" class="w-3.5 h-3.5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"/>
         </a>
     </div>
@@ -51,8 +61,8 @@
         <div class="text-center py-16 px-6">
             <x-icon name="tent" class="w-16 h-16 mx-auto mb-4 text-bone-300"/>
             <p class="text-bone-700 mb-4 font-display text-lg">Belum ada peminjaman. Yuk mulai petualanganmu!</p>
-            <a href="{{ route('catalog') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-forest-950 text-bone-50 text-sm font-semibold hover:bg-forest-800 transition">
-                <x-icon name="shopping-bag" class="w-4 h-4"/> Lihat Katalog
+            <a href="{{ route('customer.booking') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-forest-950 text-bone-50 text-sm font-semibold hover:bg-forest-800 transition">
+                <x-icon name="shopping-bag" class="w-4 h-4"/> Sewa Sekarang
             </a>
         </div>
     @else

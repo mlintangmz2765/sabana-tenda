@@ -39,6 +39,8 @@ Route::post('/logout', [LoginController::class, 'logout'])
 // =========================================================
 Route::middleware(['auth', 'role:customer'])->prefix('customer')->name('customer.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'customer'])->name('dashboard');
+    Route::get('/booking', [RentalController::class, 'customerBooking'])->name('booking');
+    Route::post('/booking', [RentalController::class, 'customerBookingStore'])->name('booking.store');
 });
 
 // =========================================================
