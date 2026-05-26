@@ -30,8 +30,8 @@
         <div>
             <h3 class="font-semibold text-ember-700">Profil customer belum lengkap</h3>
             <p class="text-sm text-ember-700 mt-1">
-                Lengkapi profil customer Anda dengan menghubungi staff SABANA Tenda untuk dapat membuat reservasi online.
-                Sementara ini, Anda dapat menyewa via WhatsApp: <a href="https://{{ config('sabana.business.whatsapp') }}" target="_blank" class="font-semibold underline">{{ config('sabana.business.whatsapp') }}</a>
+                Lengkapi profil customer Anda dengan menghubungi staff SABANA Tenda untuk dapat membuat reservasi.
+                Sementara ini, Anda dapat <a href="{{ route('catalog') }}" class="font-semibold underline">menelusuri katalog</a> dan menghubungi staff kami untuk proses sewa.
             </p>
         </div>
     </div>

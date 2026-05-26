@@ -31,9 +31,9 @@
                         Jelajahi Katalog
                         <x-icon name="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"/>
                     </a>
-                    <a href="https://{{ config('sabana.business.whatsapp') }}" target="_blank" class="inline-flex items-center gap-3 px-7 py-4 border border-forest-950 text-forest-950 hover:bg-forest-950 hover:text-bone-50 text-sm font-medium tracking-wide transition">
-                        <x-icon name="whatsapp" class="w-4 h-4"/>
-                        WhatsApp
+                    <a href="{{ route('register') }}" class="inline-flex items-center gap-3 px-7 py-4 border border-forest-950 text-forest-950 hover:bg-forest-950 hover:text-bone-50 text-sm font-medium tracking-wide transition">
+                        <x-icon name="user" class="w-4 h-4"/>
+                        Daftar & Sewa
                     </a>
                 </div>
             </div>

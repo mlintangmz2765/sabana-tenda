@@ -45,7 +45,7 @@
             <div>
                 <div class="font-mono text-[10px] tracking-[0.25em] uppercase text-ember-500 mb-4">02 &mdash; New Account</div>
                 <h2 class="font-display text-5xl font-medium leading-[0.95] tracking-super-tight">Petualanganmu<br/>dimulai dari<br/><em class="font-display italic text-ember-500" style="font-variation-settings: 'opsz' 144, 'SOFT' 100, 'wght' 300;">satu langkah.</em></h2>
-                <p class="text-bone-300 mt-6 max-w-md text-sm leading-relaxed">Buat akun customer untuk melihat riwayat sewa pribadi, dapat notifikasi promo, dan booking lebih cepat via WhatsApp.</p>
+                <p class="text-bone-300 mt-6 max-w-md text-sm leading-relaxed">Buat akun customer untuk melihat riwayat sewa pribadi, dapat notifikasi promo, dan booking lebih cepat lewat website.</p>
             </div>
             <div class="flex items-center gap-3 text-bone-400 text-xs">
                 <span class="w-12 h-px bg-bone-400/40"></span>

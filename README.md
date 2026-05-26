@@ -232,7 +232,7 @@ Semua password mengikuti format `<Role><Nama>123` (case-sensitive, kombinasi hur
 ### 3. Sebagai **Customer** (`budi_customer`)
 - Login → ke `/customer/dashboard`
 - Lihat riwayat peminjaman pribadi + total pengeluaran
-- Browse katalog publik → tersedia tombol *Sewa via WhatsApp*
+- Browse katalog publik → tersedia tombol *Sewa Sekarang* (arahkan ke katalog/login)
 
 ### 4. Sebagai **Pengunjung (tanpa login)**
 - Akses katalog publik di `/catalog`

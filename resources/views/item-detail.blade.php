@@ -81,10 +81,10 @@
             <div class="mt-10 flex flex-wrap gap-3">
                 @auth
                     @if (auth()->user()->isCustomer())
-                        <a href="https://{{ config('sabana.business.whatsapp') }}?text=Halo,%20saya%20ingin%20menyewa%20{{ urlencode($item->name) }}"
-                           target="_blank" class="inline-flex items-center gap-3 px-7 py-4 bg-forest-950 hover:bg-forest-800 text-bone-50 text-sm font-medium transition group">
-                            <x-icon name="whatsapp" class="w-4 h-4"/>
-                            Sewa via WhatsApp
+                        <a href="{{ route('catalog') }}"
+                           class="inline-flex items-center gap-3 px-7 py-4 bg-forest-950 hover:bg-forest-800 text-bone-50 text-sm font-medium transition group">
+                            <x-icon name="shopping-bag" class="w-4 h-4"/>
+                            Sewa Sekarang
                             <x-icon name="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"/>
                         </a>
                     @else
@@ -97,8 +97,8 @@
                         <x-icon name="log-in" class="w-4 h-4"/> Masuk untuk Sewa
                     </a>
                 @endauth
-                <a href="https://{{ config('sabana.business.whatsapp') }}" target="_blank" class="inline-flex items-center gap-3 px-7 py-4 border border-forest-950 hover:bg-forest-950 hover:text-bone-50 text-sm font-medium transition">
-                    <x-icon name="whatsapp" class="w-4 h-4"/> Tanya Stok
+                <a href="{{ route('catalog', ['category' => $item->category->slug]) }}" class="inline-flex items-center gap-3 px-7 py-4 border border-forest-950 hover:bg-forest-950 hover:text-bone-50 text-sm font-medium transition">
+                    <x-icon name="search" class="w-4 h-4"/> Lihat Kategori Lain
                 </a>
             </div>
 
